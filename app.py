@@ -77,7 +77,7 @@ def handle_transformation(image_obj, tf):
 		image_obj.rotate(-90)
 	if 'rotate_right' in tf:
 		image_obj.rotate(90)
-	if 'grayscale' in tf:
+	if 'grayscale' in tf and not image_obj.mimetype == 'image/jpeg':
 		image_obj.grayscale()
 	if 'flip' in tf and not tf['flip'] is None:
 		image_obj.flip(tf['flip'] == 'horizontal')
@@ -112,7 +112,7 @@ def image_manipulation():
 	# interpret the transformations
 	transformations = get_transformations_list(request.form['Transformations'])
 
-	# do each transformation
+	# do each transformation on disk
 	for tf in transformations:
 		handle_transformation(image_obj, tf)
 
@@ -125,7 +125,7 @@ def image_manipulation():
 
 	# send the result
 	result_filename = request.files['ImageFile'].filename
-	return send_file(buffer, as_attachment=True, attachment_filename=result_filename, mimetype=image_obj.type())
+	return send_file(buffer, as_attachment=True, attachment_filename=result_filename, mimetype=image_obj.mimetype)
 
 
 if __name__ == '__main__':

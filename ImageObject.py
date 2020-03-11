@@ -19,13 +19,6 @@ class ImageObject(object):
 		"""
 		return self.mimetype
 
-	def get(self):
-		"""
-		Get the image filename for retrieval.
-		:return: The image filename
-		"""
-		return self.filename
-
 	def _get_image(self):
 		"""
 		Open up the image for a transformation.
