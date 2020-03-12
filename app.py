@@ -60,6 +60,11 @@ def upload_image(image_obj):
 	:return: The location of the uploaded file
 	"""
 	filename = str(uuid.uuid1()) + "." + image_obj.filename.rsplit('.', 1)[1].lower()
+
+	# create the uploads folder if it does not exist
+	if not os.path.exists(UPLOAD_FOLDER):
+		os.makedirs(UPLOAD_FOLDER)
+
 	upload_location = os.path.join(UPLOAD_FOLDER, filename)
 	image_obj.save(upload_location)
 	return upload_location
