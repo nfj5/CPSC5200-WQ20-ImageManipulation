@@ -26,7 +26,7 @@ class ImageObject(object):
 		"""
 		return Image.open(self.image)
 
-	def flip(self, horizontal=True):
+	def flip(self, horizontal=False):
 		"""
 		Flip an image horizontally or vertically.
 		:param horizontal: Indicator to flip horizontally, otherwise vertically
@@ -41,14 +41,14 @@ class ImageObject(object):
 		:param degrees: The number of degrees to rotate the image
 		"""
 		image_obj = self._get_image()
-		image_obj.rotate(degrees, expand=True).save(image_obj.filename)
+		image_obj.rotate(-degrees, expand=True).save(image_obj.filename)
 
 	def grayscale(self):
 		"""
 		Convert an image to grayscale.
 		"""
 		image_obj = self._get_image()
-		image_obj.convert('LA').save(image_obj.filename)
+		image_obj.convert('L').save(image_obj.filename)
 
 	def resize(self, size):
 		"""

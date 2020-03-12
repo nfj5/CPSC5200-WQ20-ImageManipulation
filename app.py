@@ -77,10 +77,10 @@ def handle_transformation(image_obj, tf):
 		image_obj.rotate(-90)
 	if 'rotate_right' in tf:
 		image_obj.rotate(90)
-	if 'grayscale' in tf and not image_obj.mimetype == 'image/jpeg':
+	if 'grayscale' in tf:
 		image_obj.grayscale()
-	if 'flip' in tf and not tf['flip'] is None:
-		image_obj.flip(tf['flip'] == 'horizontal')
+	if 'flip' in tf:
+		image_obj.flip(tf['flip'] is not None and tf['flip'] == 'horizontal')
 	if 'resize' in tf and not tf['resize'] is None:
 		image_obj.resize(tf['resize'])
 	if 'thumbnail' in tf and not tf['thumbnail'] is None:
